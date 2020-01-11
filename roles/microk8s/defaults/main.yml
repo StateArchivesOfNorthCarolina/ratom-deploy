@@ -1,0 +1,2 @@
+microk8s_channel: 1.16/stable
+microk8s_addons: []

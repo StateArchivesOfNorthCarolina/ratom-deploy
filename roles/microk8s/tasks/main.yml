@@ -1,0 +1,20 @@
+---
+
+- name: Install microk8s
+  snap:
+    name: microk8s
+    classic: yes
+    channel: "{{ microk8s_channel }}"
+
+- name: Check status
+  command: microk8s.status --wait-ready --timeout 60 --yaml
+  register: microk8s_status
+
+- name: Parse status yaml
+  set_fact:
+    _status: "{{ microk8s_status.stdout | from_yaml }}"
+
+- name: Enable addons
+  command: "microk8s.enable {{ item }}"
+  when: _status['addons'][item] == "disabled"
+  loop: "{{ microk8s_addons }}"
