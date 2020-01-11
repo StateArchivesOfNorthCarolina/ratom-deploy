@@ -71,20 +71,19 @@ ansible-playbook playbooks/kube-cluster.yml -vv
        kubectl apply -f roles/kube-cluster/files/echotest.yml
 
 5. Give the certificate a couple minutes to be generated and validated. While waiting,
-   you can watch the output of::
+   you can watch the output of:
 
        kubectl -n ingress get pod
 
    When the ``cm-acme-http-solver`` pod goes away, the certificate should be validated.
    Now, navigate to https://echotest.caktus-built.com and ensure that you have a valid
-   certificate. If you don't, you want to follow the `cert-manager troubleshooting
-   <https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html>`_
+   certificate. If you don't, you want to follow the [cert-manager troubleshooting](https://docs.cert-manager.io/en/latest/getting-started/troubleshooting.html)
    steps in the documentation. But, be sure to reload a few times, and close the
    browser tab and open a new one to make sure it's really broken, because sometimes
    it takes a few minutes to go through and the browser gets stuck with the
    temporary certificate.
 
-6. When you're done, delete the echotest resources from the cluster::
+6. When you're done, delete the echotest resources from the cluster:
 
        kubectl delete -f roles/kube-cluster/files/echotest.yml
 
