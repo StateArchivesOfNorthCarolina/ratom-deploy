@@ -5,16 +5,34 @@
     name: microk8s
     classic: yes
     channel: "{{ microk8s_channel }}"
+  tags: [install]
 
 - name: Check status
   command: microk8s.status --wait-ready --timeout 60 --yaml
   register: microk8s_status
+  tags: [addons]
 
 - name: Parse status yaml
   set_fact:
     _status: "{{ microk8s_status.stdout | from_yaml }}"
+  tags: [addons]
 
 - name: Enable addons
   command: "microk8s.enable {{ item }}"
   when: _status['addons'][item] == "disabled"
   loop: "{{ microk8s_addons }}"
+  tags: [addons]
+
+- name: Add external IP address to csr template
+  lineinfile:
+    path: "{{ microk8s_csr_template }}"
+    insertafter: '^#MOREIPS'
+    line: "IP.9 = {{ microk8s_external_address }}"
+  when: microk8s_external_address | length > 0
+  register: csr_ip
+  tags: [csr]
+
+- name: Refresh CSR
+  command: "snap set microk8s csr-refresh=true"
+  when: csr_ip.changed
+  tags: [csr]

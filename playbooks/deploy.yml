@@ -1,6 +1,19 @@
 ---
 
 - hosts: aws_ec2
-  become: true
+  tags: [always]
+  tasks:
+    - name: Get stack info
+      cloudformation_info:
+        stack_name: "{{ stack_name }}"
+      register: stack_info
+      delegate_to: 127.0.0.1
+
+    - name: Save public IP
+      set_fact:
+        microk8s_external_address: "{{ stack_info['cloudformation'][stack_name]['stack_outputs']['PublicIP'] }}"
+
+- hosts: aws_ec2
+  become: yes
   roles:
     - microk8s
