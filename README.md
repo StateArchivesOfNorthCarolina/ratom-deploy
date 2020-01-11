@@ -55,6 +55,8 @@ kubectl config set-context --current --namespace=ratom-staging
 
 ### Install or update cluster
 
+To install cert-manager for Let's Encrypt support, run:
+
 ```sh
 ansible-playbook playbooks/kube-cluster.yml -vv
 ```
