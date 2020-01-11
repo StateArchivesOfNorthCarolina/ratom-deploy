@@ -1,0 +1,7 @@
+---
+
+- name: create/update a cloudformation stack
+  hosts: aws
+  gather_facts: false
+  roles:
+    - role: caktus.aws-web-stacks

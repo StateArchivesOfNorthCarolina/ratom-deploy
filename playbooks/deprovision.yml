@@ -1,0 +1,10 @@
+---
+# file: deployment/playbooks/deprovision.yml
+
+- name: create/update a cloudformation stack
+  hosts: aws
+  gather_facts: false
+  roles:
+    - role: caktus.aws-web-stacks
+      vars:
+        cloudformation_stack_state: absent

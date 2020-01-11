@@ -1,0 +1,39 @@
+# ----------------------------------------------------------------------------
+# ansible-aws-web-stacks: Provision a stack with AWS CloudFormation.
+# ----------------------------------------------------------------------------
+
+default_cloudformation_stack:
+
+  profile: "{{ aws_profile | mandatory }}"
+  region: "{{ aws_region | mandatory }}"
+  stack_name: "{{ stack_name | mandatory }}"
+  template_bucket: "aws-web-stacks-{{ project_name }}"
+  template_local_path: '{{ playbook_dir + "/../files/microk8s-no-nat.yaml" }}'
+
+  template_parameters:
+    AssetsBucketAccessControl: "Private"
+    AssetsCloudFrontCertArn: ""
+    AssetsUseCloudFront: "false"
+    UseAES256Encryption: "true"
+    SshCidr: "0.0.0.0/0"
+    ContainerInstanceType: t3.small
+    DatabaseClass: db.t2.small
+    DatabaseEngineVersion: "11"
+    DatabaseUser: "{{ project_name }}_{{ env_name }}"
+    DatabasePassword: "CHANGE-ME-CHANGE-ME"
+    DatabaseName: "{{ project_name }}_{{ env_name }}"
+    DatabaseParameterGroupFamily: postgres11
+    DomainName: ""
+    DomainNameAlternates: ""
+    KeyName: copelco
+    PrimaryAZ: "{{ aws_region }}a"
+    SecondaryAZ: "{{ aws_region }}b"
+    SecretKey: "CHANGE-ME-CHANGE-ME"
+  tags:
+    Environment: "{{ env_name }}"
+
+# Combine default stack parameters with customizations
+cloudformation_stack: >-
+  {{ default_cloudformation_stack |
+  combine(cloudformation_stack_overrides, recursive=True)
+  }}

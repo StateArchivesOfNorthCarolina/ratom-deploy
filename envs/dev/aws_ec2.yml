@@ -1,0 +1,34 @@
+---
+
+#
+# Generated (and removed) by caktus.aws-web-stacks role on provision/deprovision.
+#
+
+plugin: aws_ec2
+strict_permissions: no
+# strict: yes
+
+aws_profile: 'ratom'
+
+regions: ['us-east-1']
+
+filters:
+  tag:aws:cloudformation:stack-name: 'ratom-dev'
+
+hostnames:
+  - dns-name
+  - private-dns-name
+  - instance-id
+  - ip-address
+  - private-ip-address
+
+keyed_groups:
+  - key: tags.Environment
+    prefix: 'env'
+  - key: tags['aws:cloudformation:stack-name']
+    prefix: 'stack'
+  - key: tags['aws-web-stacks:role']
+    prefix: 'role'
+
+compose:
+  ansible_host: public_ip_address|default(private_ip_address)

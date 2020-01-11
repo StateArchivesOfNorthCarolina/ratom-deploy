@@ -1,0 +1,4 @@
+awscli
+ansible
+boto3
+pip-tools
