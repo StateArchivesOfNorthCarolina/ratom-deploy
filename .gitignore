@@ -1,3 +1,4 @@
 .python-version
 env-setup.sh
 roles/caktus.*
+roles/cchurch.*

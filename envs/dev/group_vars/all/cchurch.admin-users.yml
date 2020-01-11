@@ -1,0 +1,12 @@
+---
+
+# ----------------------------------------------------------------------------
+# cchurch.admin-users: Create admin user accounts on the remote system.
+# ----------------------------------------------------------------------------
+
+admin_users:
+  - username: copelco
+    pubkey: https://github.com/copelco.keys
+  - username: tobias
+    pubkey:
+     - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFti2WxKH5TJh6SN44pkvG2V4268sJfirn00YrKLy+lY tobias@red-ed25519"

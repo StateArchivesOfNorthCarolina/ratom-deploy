@@ -16,4 +16,5 @@
 - hosts: aws_ec2
   become: yes
   roles:
+    - cchurch.admin-users
     - microk8s
