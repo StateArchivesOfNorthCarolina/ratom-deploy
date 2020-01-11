@@ -31,6 +31,18 @@ ansible-playbook -u ubuntu playbooks/deploy.yml -vv
 ansible-playbook playbooks/deprovision.yml -vv
 ```
 
+## Configure kubctl
+
+- On the host, run ``microk8s.config``
+- Copy the YAML to ``~/.kube/config``
+- Modify ``clusters.0.cluster.server`` to match the host's IP
+
+Now you should be able to run:
+
+```sh
+kubectl cluster-info
+```
+
 
 ## Update Python requirements
 
