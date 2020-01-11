@@ -1,0 +1,50 @@
+---
+
+# cert-manager install process adapted from:
+# https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html#installing-with-regular-manifests
+- name: Create namespace for cert-manager
+  k8s:
+    context: "{{ KUBE_CONTEXT }}"
+    kubeconfig: "{{ KUBE_CONFIG }}"
+    wait: yes
+    validate:
+      fail_on_error: yes
+      strict: yes
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: cert-manager
+  register: cert_manager
+
+- name: Temporarily disable validation for cert-manager namespace
+  k8s:
+    context: "{{ KUBE_CONTEXT }}"
+    kubeconfig: "{{ KUBE_CONFIG }}"
+    wait: yes
+    validate:
+      fail_on_error: yes
+      strict: yes
+    definition:
+      apiVersion: v1
+      kind: Namespace
+      metadata:
+        name: cert-manager
+        labels:
+          certmanager.k8s.io/disable-validation: "true"
+  when: cert_manager is changed
+
+- name: Deploy cert-manager and Let's Encrypt
+  k8s:
+    context: "{{ KUBE_CONTEXT }}"
+    kubeconfig: "{{ KUBE_CONFIG }}"
+    wait: yes
+    # FIXME: cert-manager.yaml doesn't validate, so this is disabled for now.
+    # Maybe the next version will validate?
+    # validate:
+    #   fail_on_error: yes
+    #   strict: yes
+    definition: "{{ lookup('file', item) }}"
+  with_items:
+    - letsencrypt/cert-manager.yaml
+    - letsencrypt/issuers.yaml

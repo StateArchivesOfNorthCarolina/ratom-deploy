@@ -1,0 +1,9 @@
+---
+
+# ----------------------------------------------------------------------------
+# kube-cluster: Configuration for Kubernetes cluster
+# ----------------------------------------------------------------------------
+
+CLUSTER_TYPE: microk8s
+KUBE_CONTEXT: microk8s
+LETSENCRYPT_EMAIL: ratom-team@caktusgroup.com
