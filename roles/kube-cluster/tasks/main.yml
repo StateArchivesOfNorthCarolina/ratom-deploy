@@ -44,7 +44,7 @@
     # validate:
     #   fail_on_error: yes
     #   strict: yes
-    definition: "{{ lookup('file', item) }}"
+    definition: "{{ lookup('template', item) }}"
   with_items:
     - letsencrypt/cert-manager.yaml
     - letsencrypt/issuers.yaml
