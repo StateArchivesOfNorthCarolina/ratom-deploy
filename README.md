@@ -73,7 +73,7 @@ ansible-playbook playbooks/kube-cluster.yml -vv
 5. Give the certificate a couple minutes to be generated and validated. While waiting,
    you can watch the output of:
 
-       kubectl -n ingress get pod
+       kubectl -n echoserver get pod
 
    When the ``cm-acme-http-solver`` pod goes away, the certificate should be validated.
    Now, navigate to https://echotest.caktus-built.com and ensure that you have a valid
@@ -83,7 +83,16 @@ ansible-playbook playbooks/kube-cluster.yml -vv
    it takes a few minutes to go through and the browser gets stuck with the
    temporary certificate.
 
-6. When you're done, delete the echotest resources from the cluster:
+6. You should see the ``*-tls`` secret in the **echoserver** namespace:
+
+       kubectl -n echoserver get secret
+       NAME                  TYPE                                  DATA   AGE
+       default-token-62pdt   kubernetes.io/service-account-token   3      5m
+       echoserver-tls        kubernetes.io/tls                     3      5m
+
+   If not, you may need to re-create the ingress by deleteing and re-applying it.
+
+7. When you're done, delete the echotest resources from the cluster:
 
        kubectl delete -f roles/kube-cluster/files/echotest.yml
 
