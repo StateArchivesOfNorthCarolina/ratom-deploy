@@ -1,3 +1,5 @@
+---
+
 # ----------------------------------------------------------------------------
 # ansible-aws-web-stacks: Provision a stack with AWS CloudFormation.
 # ----------------------------------------------------------------------------
@@ -25,6 +27,9 @@ default_cloudformation_stack:
     DatabaseParameterGroupFamily: postgres11
     DomainName: ""
     DomainNameAlternates: ""
+    ElasticsearchInstanceType: t2.small.elasticsearch
+    ElasticsearchVersion: "7.1"
+    ElasticsearchVolumeSize: "10"
     KeyName: copelco
     PrimaryAZ: "{{ aws_region }}a"
     SecondaryAZ: "{{ aws_region }}b"
