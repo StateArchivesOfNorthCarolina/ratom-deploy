@@ -18,7 +18,7 @@ default_cloudformation_stack:
     AssetsUseCloudFront: "false"
     UseAES256Encryption: "true"
     SshCidr: "0.0.0.0/0"
-    ContainerInstanceType: t3.small
+    ContainerInstanceType: m4.large
     DatabaseClass: db.t2.small
     DatabaseEngineVersion: "11"
     DatabaseUser: "{{ project_name }}_{{ env_name }}"
