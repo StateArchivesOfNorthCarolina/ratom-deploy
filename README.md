@@ -24,8 +24,8 @@ export AWS_PROFILE=ratom
 ## Provision CloudFormation stack
 ansible-playbook playbooks/provision.yml -vv
 
-## Deploy microk8s
-ansible-playbook -u ubuntu playbooks/deploy.yml -vv
+## Bootstrap host and install microk8s
+ansible-playbook -u ubuntu playbooks/deploy-host.yml -vv
 ```
 
 
@@ -58,7 +58,7 @@ kubectl config set-context --current --namespace=ratom-staging
 To install cert-manager for Let's Encrypt support, run:
 
 ```sh
-ansible-playbook playbooks/kube-cluster.yml -vv
+ansible-playbook playbooks/configure-cluster.yml -vv
 ```
 
 
