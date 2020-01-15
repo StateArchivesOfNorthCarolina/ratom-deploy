@@ -1,7 +1,8 @@
 ---
 
 # ----------------------------------------------------------------------------
-# cchurch.admin-users: Create admin user accounts on the remote system.
+# cchurch.admin-users: Environment-specific admin user accounts on the
+#                      remote host system.
 # ----------------------------------------------------------------------------
 
 admin_users:

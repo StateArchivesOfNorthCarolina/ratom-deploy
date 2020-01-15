@@ -1,7 +1,8 @@
 ---
 
 # ----------------------------------------------------------------------------
-# kube-cluster: Environment-specific configuration for Kubernetes cluster
+# kube-cluster: Configuration for Kubernetes cluster
 # ----------------------------------------------------------------------------
 
-LETSENCRYPT_EMAIL: ratom-team@caktusgroup.com
+CLUSTER_TYPE: microk8s
+KUBE_CONTEXT: microk8s

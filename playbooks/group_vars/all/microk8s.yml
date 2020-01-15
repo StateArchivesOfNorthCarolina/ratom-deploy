@@ -1,7 +1,10 @@
 ---
 
 # ----------------------------------------------------------------------------
-# kube-cluster: Environment-specific configuration for Kubernetes cluster
+# microk8s: Configure microk8s cluster (for roles/microk8s Ansible role).
 # ----------------------------------------------------------------------------
 
-LETSENCRYPT_EMAIL: ratom-team@caktusgroup.com
+microk8s_addons:
+  - dns
+  - ingress
+  - metrics-server
