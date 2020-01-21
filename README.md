@@ -32,13 +32,15 @@ ansible-playbook -u ubuntu playbooks/deploy-host.yml -vv
 ## Managing Kubernetes Clusters
 
 
-### Setup kubctl
+### Obtain kubectl config
 
 To run ``kubctl`` locally:
 
 - On the host, run ``microk8s.config``
-- Copy the YAML to ``~/.kube/config``
+- Copy the YAML to ``~/.kube/config`` on your local machine
 - Modify ``clusters.0.cluster.server`` to match the host's IP
+
+Next, install [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 
 Now you should be able to run:
 
@@ -160,7 +162,7 @@ You can interact with running pods via ``kubectl``, for example:
     frontend-687d4b9bf-pnqkw   1/1     Running   0          15m
 
     # tail logs for the api
-    $ kubectl logs -f deployment/api
+    $ kubectl logs -f -lapp=api
     # <snip>
     [pid: 15|app: 0|req: 10/14] 10.52.1.7 () {58 vars in 1375 bytes} [Fri Nov  8 11:19:57 2019] GET /admin/ratom/message/ => generated 28852 bytes in 129 msecs (HTTP/1.1 200) 10 headers in 513 bytes (1 switches on core 2)
     [pid: 14|app: 0|req: 5/15] 10.52.1.7 () {60 vars in 1271 bytes} [Fri Nov  8 11:20:32 2019] POST /graphql => generated 240 bytes in 30 msecs (HTTP/1.1 200) 8 headers in 400 bytes (1 switches on core 1)
