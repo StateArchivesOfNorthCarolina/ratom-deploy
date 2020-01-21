@@ -1,4 +1,6 @@
 awscli
 ansible
 boto3
+kubernetes-validate
+openshift
 pip-tools

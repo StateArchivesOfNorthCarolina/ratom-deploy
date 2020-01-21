@@ -5,3 +5,12 @@
   gather_facts: false
   roles:
     - role: caktus.aws-web-stacks
+  post_tasks:
+    - name: Prompt if CloudFormation stack changed
+      pause:
+        prompt: >
+          A changeset was created for the CloudFormation stack. You MUST login to the AWS console,
+          inspect the changeset, and if everything looks good (i.e., it's not DELETING anything
+          unexpectedly), execute the changeset. When complete, hit RETURN to continue or Control-C,
+          then A to abort.
+      when: cloudformation_stack_result is changed

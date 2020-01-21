@@ -1,39 +1,17 @@
+---
+
 # ----------------------------------------------------------------------------
 # ansible-aws-web-stacks: Provision a stack with AWS CloudFormation.
 # ----------------------------------------------------------------------------
 
-default_cloudformation_stack:
-
-  profile: "{{ aws_profile | mandatory }}"
-  region: "{{ aws_region | mandatory }}"
-  stack_name: "{{ stack_name | mandatory }}"
-  template_bucket: "aws-web-stacks-{{ project_name }}"
-  template_local_path: '{{ playbook_dir + "/../files/microk8s-no-nat.yaml" }}'
-
+cloudformation_stack_overrides:
   template_parameters:
-    AssetsBucketAccessControl: "Private"
-    AssetsCloudFrontCertArn: ""
-    AssetsUseCloudFront: "false"
-    UseAES256Encryption: "true"
-    SshCidr: "0.0.0.0/0"
-    ContainerInstanceType: t3.small
-    DatabaseClass: db.t2.small
-    DatabaseEngineVersion: "11"
-    DatabaseUser: "{{ project_name }}_{{ env_name }}"
-    DatabasePassword: "CHANGE-ME-CHANGE-ME"
-    DatabaseName: "{{ project_name }}_{{ env_name }}"
-    DatabaseParameterGroupFamily: postgres11
-    DomainName: ""
-    DomainNameAlternates: ""
+    DatabasePassword: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          37613832666663373731643030363264343730323236323838363562336239383933386634633238
+          6264643836643934306631383136363335386437663535310a303731373737353738633230616663
+          32663663636234336161323330613164336566323263623164613032343561383536343832313466
+          6139373566333539360a316130323566383837343663646430353338363737363432393764306639
+          35633664303134396438323765343661623361373232336537656333653036656230613034306461
+          6363353063303235356137623735313038656134323636346232
     KeyName: copelco
-    PrimaryAZ: "{{ aws_region }}a"
-    SecondaryAZ: "{{ aws_region }}b"
-    SecretKey: "CHANGE-ME-CHANGE-ME"
-  tags:
-    Environment: "{{ env_name }}"
-
-# Combine default stack parameters with customizations
-cloudformation_stack: >-
-  {{ default_cloudformation_stack |
-  combine(cloudformation_stack_overrides, recursive=True)
-  }}

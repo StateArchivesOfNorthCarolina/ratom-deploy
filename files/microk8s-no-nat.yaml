@@ -822,6 +822,16 @@ Parameters:
       - '2.3'
       - '5.1'
       - '5.3'
+      - '5.5'
+      - '5.6'
+      - '6.0'
+      - '6.2'
+      - '6.3'
+      - '6.4'
+      - '6.5'
+      - '6.7'
+      - '6.8'
+      - '7.1'
     ConstraintDescription: must select a valid Elasticsearch version.
     Default: '2.3'
     Description: 'Elasticsearch version. Note: t2.micro.elasticsearch instances support
@@ -1355,6 +1365,11 @@ Resources:
           - ''
           - - "#!/bin/bash\n"
             - "apt-get update\n"
+            - cfn-signal -e $? --stack="
+            - !Ref 'AWS::StackName'
+            - '" --region='
+            - !Ref 'AWS::Region'
+            - " --resource Ec2Instance\n"
     Type: AWS::EC2::Instance
   Eip:
     Type: AWS::EC2::EIP

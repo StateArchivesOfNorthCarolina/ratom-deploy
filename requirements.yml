@@ -2,3 +2,5 @@
 
 - src: https://github.com/caktus/ansible-role-aws-web-stacks
   name: caktus.aws-web-stacks
+
+- name: cchurch.admin-users

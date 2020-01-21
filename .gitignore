@@ -1,3 +1,5 @@
 .python-version
 env-setup.sh
-roles/
+roles/caktus.*
+roles/cchurch.*
+.vault_pass

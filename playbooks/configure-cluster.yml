@@ -1,0 +1,5 @@
+- hosts: aws
+  connection: local
+  gather_facts: false
+  roles:
+    - kube-cluster

@@ -1,0 +1,10 @@
+---
+
+# ----------------------------------------------------------------------------
+# microk8s: Configure microk8s cluster (for roles/microk8s Ansible role).
+# ----------------------------------------------------------------------------
+
+microk8s_addons:
+  - dns
+  - ingress
+  - metrics-server

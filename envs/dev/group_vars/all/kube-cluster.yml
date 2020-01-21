@@ -1,0 +1,7 @@
+---
+
+# ----------------------------------------------------------------------------
+# kube-cluster: Environment-specific configuration for Kubernetes cluster
+# ----------------------------------------------------------------------------
+
+LETSENCRYPT_EMAIL: ratom-team@caktusgroup.com
