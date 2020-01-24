@@ -18,3 +18,12 @@
   roles:
     - cchurch.admin-users
     - microk8s
+
+- hosts: aws_ec2
+  become: yes
+  tasks:
+    - name: Install project apt requirements
+      apt:
+        state: latest
+        pkg:
+          - postgresql-client-10
