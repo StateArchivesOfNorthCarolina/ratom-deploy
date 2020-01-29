@@ -29,6 +29,8 @@ default_cloudformation_stack:
     ElasticsearchInstanceType: t2.small.elasticsearch
     ElasticsearchVersion: "7.1"
     ElasticsearchVolumeSize: "10"
+    RedisNodeType: cache.t2.micro
+    RedisVersion: "5.0.6"
     PrimaryAZ: "{{ aws_region }}a"
     SecondaryAZ: "{{ aws_region }}b"
     SecretKey: "NOTUSED"
