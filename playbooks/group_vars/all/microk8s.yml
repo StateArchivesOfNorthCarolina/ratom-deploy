@@ -8,3 +8,4 @@ microk8s_addons:
   - dns
   - ingress
   - metrics-server
+  - storage
