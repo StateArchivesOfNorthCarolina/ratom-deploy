@@ -1,0 +1,8 @@
+---
+
+project_name: ratom
+env_name: dev
+stack_name: '{{ project_name }}-{{ env_name }}'
+
+aws_profile: ratom
+aws_region: us-east-1

@@ -3,6 +3,3 @@
 # ----------------------------------------------------------------------------
 # kube-cluster: Configuration for Kubernetes cluster
 # ----------------------------------------------------------------------------
-
-CLUSTER_TYPE: microk8s
-KUBE_CONTEXT: microk8s

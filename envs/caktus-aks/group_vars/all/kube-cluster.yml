@@ -5,5 +5,5 @@
 # ----------------------------------------------------------------------------
 
 LETSENCRYPT_EMAIL: ratom-team@caktusgroup.com
-CLUSTER_TYPE: microk8s
-KUBE_CONTEXT: microk8s
+CLUSTER_TYPE: aks
+KUBE_CONTEXT: ratom-staging
