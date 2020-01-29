@@ -174,3 +174,12 @@ You can interact with running pods via ``kubectl``, for example:
     # copy a file to a pod
     $ kubectl cp /path/to/source api-55c4fbb789-b8m2v:/path/to/dest
 ```
+
+
+# AKS
+
+```
+az login
+az aks get-credentials --resource-group ratom-staging --name ratom-stagin
+ansible-playbook -i envs/caktus-aks playbooks/configure-cluster.yml -vv
+```
