@@ -48,3 +48,20 @@
   with_items:
     - letsencrypt/cert-manager.yaml
     - letsencrypt/issuers.yaml
+
+# ingress-nginx installation process adapted from:
+# https://kubernetes.github.io/ingress-nginx/deploy/#prerequisite-generic-deployment-command
+- name: Deploy Nginx Ingress Controller
+  k8s:
+    context: "{{ KUBE_CONTEXT }}"
+    kubeconfig: "{{ KUBE_CONFIG }}"
+    wait: yes
+    validate:
+      fail_on_error: yes
+      strict: yes
+    definition: "{{ lookup('template', item) }}"
+  with_items:
+    - ingress-nginx/mandatory.yaml
+    - ingress-nginx/cloud-generic.yaml
+    - ingress-nginx/patch-configmap.yaml
+  when: kube_cluster_install_ingress
