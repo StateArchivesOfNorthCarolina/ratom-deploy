@@ -182,4 +182,19 @@ You can interact with running pods via ``kubectl``, for example:
 az login
 az aks get-credentials --resource-group ratom-staging --name ratom-stagin
 ansible-playbook -i envs/caktus-aks playbooks/configure-cluster.yml -vv
+kubectl apply -f roles/kube-cluster/files/echotest.yml
+```
+
+
+Azure Database for PostgreSQL server
+
+* Add your IP to the server firewall under Settings -> Connection security
+* Add the K8s outbound IP to the server firewall under Settings -> Connection security
+* Create a database:
+
+```
+CREATE DATABASE ratom_staging;
+CREATE ROLE ratom_staging WITH LOGIN NOSUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION PASSWORD '<pass>';
+GRANT CONNECT ON DATABASE ratom_staging TO ratom_staging;
+GRANT ALL PRIVILEGES ON DATABASE ratom_staging TO ratom_staging;
 ```
