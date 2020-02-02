@@ -1,0 +1,8 @@
+- hosts: aws
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Install echo server
+      import_role:
+        name: caktus.k8s-web-cluster
+        tasks_from: echotest
