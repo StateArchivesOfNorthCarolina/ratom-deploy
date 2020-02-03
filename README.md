@@ -12,23 +12,11 @@ pip install -r requirements.txt
 ansible-galaxy install -f -r requirements.yml -p roles/
 ```
 
-## Choose Environment
+## Choose Hosting Provider
 
-* [Azure](docs/azure.md)
-* [AWS](docs/aws.md) (not fully supported)
+* [Microsoft Azure](docs/azure.md)
+* [Amazon Web Services (AWS)](docs/aws.md) (not fully supported)
 
-
-## Update Python requirements
-
-If ``requirements.in`` is updated, run:
-
-```
-pip-compile --upgrade requirements.in
-pip-sync requirements.txt
-```
-
-
-# Staging environment
 
 ## Cluster Access
 
@@ -81,4 +69,14 @@ You can interact with running pods via ``kubectl``, for example:
 
     # copy a file to a pod
     $ kubectl cp /path/to/source api-55c4fbb789-b8m2v:/path/to/dest
+```
+
+
+## Update Python requirements
+
+If ``requirements.in`` is updated, run:
+
+```
+pip-compile --upgrade requirements.in
+pip-sync requirements.txt
 ```
