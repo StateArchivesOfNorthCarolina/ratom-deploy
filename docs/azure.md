@@ -146,11 +146,8 @@ ansible-playbook -i envs/caktus-aks playbooks/echotest.yml --extra-vars "k8s_ech
 We need to allow connections into the PostgreSQL database server.
 
 Save the **outbound** IP address of the kubernetes cluster to an environment
-variable:
-
-```sh
-az aks show
-```
+variable. This is not the same IP address obtained from the ingress controller
+above. Find it in the Azure console and add it to your shell's environment:
 
 ```sh
 export IP_ADDRESS=<ip-address>
