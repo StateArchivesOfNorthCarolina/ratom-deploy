@@ -145,8 +145,12 @@ ansible-playbook -i envs/caktus-aks playbooks/echotest.yml --extra-vars "k8s_ech
 
 We need to allow connections into the PostgreSQL database server.
 
-Save the external IP address of the kubernetes cluster to an environment
+Save the **outbound** IP address of the kubernetes cluster to an environment
 variable:
+
+```sh
+az aks show
+```
 
 ```sh
 export IP_ADDRESS=<ip-address>
@@ -215,4 +219,26 @@ CREATE DATABASE <dbname>;
 CREATE ROLE <dbuser> WITH LOGIN NOSUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION PASSWORD '<password>';
 GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
+```
+
+# Deploy RATOM appliccation
+
+Set current namespace:
+
+```sh
+kubectl config set-context --current --namespace=ratom-staging
+```
+
+From the ``ratom_web`` repo, run:
+
+```sh
+cd deployment/
+ansible-playbook deploy.yaml -l caktus-ratom
+```
+
+Fro the ``ratom_server`` repo, run:
+
+```sh
+cd deployment/
+ansible-playbook deploy.yaml -l caktus-ratom
 ```
