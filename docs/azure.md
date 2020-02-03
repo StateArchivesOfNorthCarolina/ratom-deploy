@@ -51,9 +51,10 @@ Create a new managed Azure Kubernetes Service (AKS) cluster using
 [az aks create](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-create):
 
 ```sh
+export CLUSTER_NAME=caktus-ratom
 az aks create \
     --resource-group $RESOURCE_GROUP \
-    --name caktus-ratom \
+    --name $CLUSTER_NAME \
     --location eastus \
     --node-count 2 \
     --node-vm-size Standard_D2s_v3 \
@@ -90,11 +91,11 @@ To configure ``kubectl`` to connect to your Kubernetes cluster, use
 ``az aks get-credentials``:
 
 ```
-az aks get-credentials --resource-group ratom-group --name caktus-ratom
+az aks get-credentials --resource-group ratom-group --name $CLUSTER_NAME
 ```
 
-This configures ``kubectl`` credentials to the cluster under the context
-``caktus-ratom``. Verify the connection to your cluster with:
+This configures ``kubectl`` credentials to the cluster under the context defined
+in ``$CLUSTER_NAME``. Verify the connection to your cluster with:
 
 ```
 kubectl get nodes
@@ -238,12 +239,12 @@ From the ``ratom_web`` repo, run:
 
 ```sh
 cd deployment/
-ansible-playbook deploy.yaml -l caktus-ratom
+ansible-playbook deploy.yaml -l $CLUSTER_NAME
 ```
 
 Fro the ``ratom_server`` repo, run:
 
 ```sh
 cd deployment/
-ansible-playbook deploy.yaml -l caktus-ratom
+ansible-playbook deploy.yaml -l $CLUSTER_NAME
 ```
