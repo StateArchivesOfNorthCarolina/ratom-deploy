@@ -203,7 +203,7 @@ username to be be in <username@hostname> format.
 ```sh
 export PGSSLMODE=require
 export PGUSER=$PGUSER@$AZ_PGSERVER  # Azure requirement
-export PGHOST=<fqdm>
+export PGHOST=<fqdn>
 ```
 
 Now you should be able to connect directly to the default ``postgres`` database:
