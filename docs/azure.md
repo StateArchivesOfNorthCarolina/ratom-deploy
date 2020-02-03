@@ -3,7 +3,13 @@
 This document provides instructions for provisioning a RATOM environment in
 Azure.
 
-## Provision
+
+## Provision Azure Resources
+
+This section walks through creating the following Azure services using the CLI:
+* [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/)
+* [Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/)
+
 
 ### Install the Azure CLI
 
@@ -19,7 +25,7 @@ To sign in, use the ``az login`` command. If the CLI can open your default
 browser, it will do so and load an Azure sign-in page.
 
 
-### (Optional) Set default subscription
+#### (Optional) Set default subscription
 
 You can configure the default Azure subscription, used by the following
 ``az create`` requests, using:
@@ -55,7 +61,8 @@ az aks create \
     --kubernetes-version 1.15.7
 ```
 
-## Azure Database for PostgreSQL
+
+### Azure Database for PostgreSQL
 
 Create an Azure Database for PostgreSQL server using
 [az postgres server create](https://docs.microsoft.com/en-us/cli/azure/postgres/server?view=azure-cli-latest#az-postgres-server-create):
@@ -77,7 +84,7 @@ az postgres server create \
 While this is creating, let's go ahead and configure our cluster.
 
 
-## Configure Cluster
+## Configure Your Kubernetes Cluster
 
 To configure ``kubectl`` to connect to your Kubernetes cluster, use
 ``az aks get-credentials``:
@@ -106,7 +113,7 @@ Install it with:
 ansible-playbook -i envs/caktus-aks playbooks/configure-cluster.yml -vv
 ```
 
-## Test Let's Encrypt
+### Test Let's Encrypt
 
 During the installation, an Azure public IP address is created for the nginx
 ingress controller. It will take a few minutes to be assigned, but eventually
@@ -218,7 +225,8 @@ GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
-# Deploy RATOM appliccation
+
+## Deploy RATOM appliccation
 
 Set current namespace:
 
