@@ -1,4 +1,0 @@
-KUBE_CONFIG: ~/.kube/config
-CLUSTER_TYPE: ''
-LETSENCRYPT_EMAIL: ''
-KUBE_CONTEXT: ''

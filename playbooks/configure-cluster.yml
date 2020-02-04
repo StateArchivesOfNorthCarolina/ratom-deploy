@@ -2,4 +2,4 @@
   connection: local
   gather_facts: false
   roles:
-    - kube-cluster
+    - caktus.k8s-web-cluster

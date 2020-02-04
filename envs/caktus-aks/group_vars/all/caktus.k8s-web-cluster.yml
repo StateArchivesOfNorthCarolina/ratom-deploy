@@ -1,0 +1,11 @@
+---
+
+# ----------------------------------------------------------------------------
+# caktus.k8s-web-cluster: Configure kubernetes cluster for web apps
+# ----------------------------------------------------------------------------
+
+k8s_cluster_type: azure
+k8s_context: caktus-ratom
+
+k8s_letsencrypt_email: ratom-team@caktusgroup.com
+k8s_echotest_hostname: echotest.caktus-built.com
