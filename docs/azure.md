@@ -87,6 +87,10 @@ While this is creating, let's go ahead and configure our cluster.
 
 ## Configure Your Kubernetes Cluster
 
+Next, install
+[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), which we'll
+use to manage the Kubernetes cluster.
+
 To configure ``kubectl`` to connect to your Kubernetes cluster, use
 ``az aks get-credentials``:
 
@@ -227,7 +231,7 @@ GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
 
-## Deploy RATOM appliccation
+## Deploy RATOM application
 
 Set current namespace:
 
