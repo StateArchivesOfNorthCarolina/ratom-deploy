@@ -1,5 +1,0 @@
-- hosts: aws
-  connection: local
-  gather_facts: false
-  roles:
-    - caktus.k8s-web-cluster

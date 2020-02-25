@@ -9,7 +9,8 @@ Install Python and Ansible requirements:
 
 ```sh
 pip install -r requirements.txt
-ansible-galaxy install -f -r requirements.yml -p roles/
+cd deploy/
+ansible-galaxy install -f -r requirements.yaml -p roles/
 ```
 
 ## Choose Hosting Provider

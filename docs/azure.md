@@ -115,7 +115,7 @@ need to be configured for your cluster.
 Install it with:
 
 ```sh
-ansible-playbook -i envs/caktus-aks playbooks/configure-cluster.yml -vv
+ansible-playbook -l ratom-staging playbooks/configure-cluster.yml -vv
 ```
 
 ### Test Let's Encrypt
