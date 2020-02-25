@@ -1,6 +1,8 @@
 - hosts: aws
   connection: local
   gather_facts: false
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
   tasks:
     - name: Install echo server
       import_role:
