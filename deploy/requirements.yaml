@@ -1,10 +1,5 @@
 ---
 
-- src: https://github.com/caktus/ansible-role-aws-web-stacks
-  name: caktus.aws-web-stacks
-
 - src: https://github.com/caktus/ansible-role-k8s-web-cluster
   version: init-role  # TODO: remove
   name: caktus.k8s-web-cluster
-
-- name: cchurch.admin-users
