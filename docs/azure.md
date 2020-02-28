@@ -87,6 +87,10 @@ While this is creating, let's go ahead and configure our cluster.
 
 ## Configure Your Kubernetes Cluster
 
+Next, install
+[kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/), which we'll
+use to manage the Kubernetes cluster.
+
 To configure ``kubectl`` to connect to your Kubernetes cluster, use
 ``az aks get-credentials``:
 
@@ -111,7 +115,7 @@ need to be configured for your cluster.
 Install it with:
 
 ```sh
-ansible-playbook -i envs/caktus-aks playbooks/configure-cluster.yml -vv
+ansible-playbook -l caktus-ratom deploy.yaml -vv
 ```
 
 ### Test Let's Encrypt
@@ -130,7 +134,7 @@ the record a minute or two to propagate.
 Now install the echo test server:
 
 ```sh
-ansible-playbook -i envs/caktus-aks playbooks/echotest.yml -vv
+ansible-playbook -l caktus-ratom echotest.yaml -vv
 ```
 
 Give the certificate a couple minutes to be generated and validated. While
@@ -145,7 +149,7 @@ valid certificate.
 To uninstall echotest, run:
 
 ```sh
-ansible-playbook -i envs/caktus-aks playbooks/echotest.yml --extra-vars "k8s_echotest_state=absent" -vv
+ansible-playbook -l caktus-ratom echotest.yaml --extra-vars "k8s_echotest_state=absent" -vv
 ```
 
 
@@ -227,7 +231,7 @@ GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
 
-## Deploy RATOM appliccation
+## Deploy RATOM application
 
 Set current namespace:
 

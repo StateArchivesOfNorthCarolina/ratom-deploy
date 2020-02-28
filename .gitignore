@@ -1,5 +1,5 @@
 .python-version
 env-setup.sh
-roles/caktus.*
-roles/cchurch.*
+deploy/roles/caktus.*
 .vault_pass
+.vscode
