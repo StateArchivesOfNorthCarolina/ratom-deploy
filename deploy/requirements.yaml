@@ -1,5 +1,4 @@
 ---
 
 - src: https://github.com/caktus/ansible-role-k8s-web-cluster
-  version: init-role  # TODO: remove
   name: caktus.k8s-web-cluster
