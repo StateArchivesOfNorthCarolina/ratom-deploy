@@ -246,6 +246,7 @@ GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
+
 ## Azure Storage Account
 
 Create an Azure storage account using
