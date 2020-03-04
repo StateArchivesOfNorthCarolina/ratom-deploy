@@ -246,6 +246,29 @@ GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
+## Azure Storage Account
+
+Create an Azure storage account using
+[az storage account create](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create):
+
+```sh
+export STORAGE_NAME=yourstoragename
+az storage account create \
+    --name $STORAGE_NAME \
+    --resource-group $RESOURCE_GROUP
+```
+
+Next, create a container in the above storage account that we'll use to store PST files using:
+[az storage container create](https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create):
+
+```sh
+export CONTAINER_NAME=yourcontainername
+az storage container create \
+    --account-name $STORAGE_NAME \
+    --name $CONTAINER_NAME \
+    --public-access off
+```
+
 
 ## Deploy RATOM application
 
