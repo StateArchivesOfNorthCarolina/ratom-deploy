@@ -1,4 +1,4 @@
-- hosts: aws
+- hosts: k8s
   connection: local
   gather_facts: false
   vars:
