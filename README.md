@@ -1,3 +1,5 @@
+![Logo](https://github.com/libratom/ratom-logos/raw/master/basic_variations/RATOM_Vector_Logo_v1_300px.png)
+
 # ratom-deploy
 
 Configure a Kubernetes cluster for the RATOM project.
@@ -81,3 +83,17 @@ If ``requirements.in`` is updated, run:
 pip-compile --upgrade requirements.in
 pip-sync requirements.txt
 ```
+
+
+## License(s)
+
+Logos, documentation, and other non-software products of the RATOM team are distributed under the terms of Creative Commons 4.0 Attribution. Software developed for the RATOM project is distributed under the terms of the MIT License. See the LICENSE file for additional details.
+
+&copy; 2020, The University of North Carolina at Chapel Hill.
+
+
+## Development Team
+
+Developed by [Caktus Group](https://www.caktusgroup.com/) for the Review, Appraisal, and Triage of Mail (RATOM) project.
+
+See [https://ratom.web.unc.edu](https://ratom.web.unc.edu/) for RATOM project details, staff bios, and news.
