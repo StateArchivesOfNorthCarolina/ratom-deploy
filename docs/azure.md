@@ -246,6 +246,13 @@ GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
 ```
 
+Extensions require admin permissions, so add them now:
+
+```sql
+\c <dbname>
+CREATE EXTENSION IF NOT EXISTS citext;
+```
+
 
 ## Azure Storage Account
 
