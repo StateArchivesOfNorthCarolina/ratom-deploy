@@ -1,5 +1,5 @@
 ---
 
-k8s_context: ratom-staging
+k8s_context: sanc-ratom
 k8s_letsencrypt_email: ratom-team@caktusgroup.com
 k8s_echotest_hostname: echotest.caktus-built.com

@@ -21,8 +21,14 @@ On a Mac, you can run:
 brew update && brew install azure-cli
 ```
 
-To sign in, use the ``az login`` command. If the CLI can open your default
-browser, it will do so and load an Azure sign-in page.
+To sign in, use:
+
+```sh
+az login
+```
+
+If the CLI can open your default browser, it will do so and load an Azure
+sign-in page.
 
 
 #### (Optional) Set default subscription
@@ -41,7 +47,7 @@ Create a RATOM resource group using
 [az group create](https://docs.microsoft.com/en-us/cli/azure/group?view=azure-cli-latest#az-group-create):
 
 ```sh
-export RESOURCE_GROUP=ratom-group
+export RESOURCE_GROUP=yourgroupname
 az group create \
     --name $RESOURCE_GROUP \
     --location eastus
@@ -51,7 +57,7 @@ Create a new managed Azure Kubernetes Service (AKS) cluster using
 [az aks create](https://docs.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-create):
 
 ```sh
-export CLUSTER_NAME=caktus-ratom
+export CLUSTER_NAME=yourclustername
 az aks create \
     --resource-group $RESOURCE_GROUP \
     --name $CLUSTER_NAME \
@@ -69,7 +75,7 @@ Create an Azure Database for PostgreSQL server using
 [az postgres server create](https://docs.microsoft.com/en-us/cli/azure/postgres/server?view=azure-cli-latest#az-postgres-server-create):
 
 ```sh
-export AZ_PGSERVER=ratomdb
+export AZ_PGSERVER=yourservername
 export PGUSER=ratom
 export PGPASSWORD=<password>
 az postgres server create \
@@ -95,7 +101,7 @@ To configure ``kubectl`` to connect to your Kubernetes cluster, use
 ``az aks get-credentials``:
 
 ```
-az aks get-credentials --resource-group ratom-group --name $CLUSTER_NAME
+az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME
 ```
 
 This configures ``kubectl`` credentials to the cluster under the context defined
@@ -109,13 +115,23 @@ You should see a list of nodes.
 
 Next, we'll add the cluster ingress controller and certificate manager using
 [caktus.k8s-web-cluster](https://github.com/caktus/ansible-role-k8s-web-cluster),
-an Ansible role. Review the variables in ``caktus.k8s-web-cluster.yml``. These
-need to be configured for your cluster.
+an Ansible role.
+
+Add a new host vars file to ``deploy/host_vars/$CLUSTER_NAME.yaml``. Use the
+existing host vars files as a reference. The most important variables are:
+
+* ``k8s_context``: The name of your cluster context found in your
+  ``.kube/config`` file. This will likely just be ``$CLUSTER_NAME``.
+* ``k8s_letsencrypt_email``: The email address used for Let's Encrypt
+  cert-related emails.
+
+Next add $CLUSTER_NAME to ``deploy/inventory`` and add it to the ``[k8s]``
+group. Use the existing clusters as a reference.
 
 Install it with:
 
 ```sh
-ansible-playbook -l caktus-ratom deploy.yaml -vv
+ansible-playbook -l $CLUSTER_NAME deploy.yaml -vv
 ```
 
 ### Test Let's Encrypt
@@ -134,7 +150,7 @@ the record a minute or two to propagate.
 Now install the echo test server:
 
 ```sh
-ansible-playbook -l caktus-ratom echotest.yaml -vv
+ansible-playbook -l $CLUSTER_NAME echotest.yaml -vv
 ```
 
 Give the certificate a couple minutes to be generated and validated. While
@@ -149,7 +165,7 @@ valid certificate.
 To uninstall echotest, run:
 
 ```sh
-ansible-playbook -l caktus-ratom echotest.yaml --extra-vars "k8s_echotest_state=absent" -vv
+ansible-playbook -l $CLUSTER_NAME echotest.yaml --extra-vars "k8s_echotest_state=absent" -vv
 ```
 
 
@@ -228,6 +244,37 @@ CREATE DATABASE <dbname>;
 CREATE ROLE <dbuser> WITH LOGIN NOSUPERUSER INHERIT CREATEDB NOCREATEROLE NOREPLICATION PASSWORD '<password>';
 GRANT CONNECT ON DATABASE <dbname> TO <dbuser>;
 GRANT ALL PRIVILEGES ON DATABASE <dbname> TO <dbuser>;
+```
+
+Extensions require admin permissions, so add them now:
+
+```sql
+\c <dbname>
+CREATE EXTENSION IF NOT EXISTS citext;
+```
+
+
+## Azure Storage Account
+
+Create an Azure storage account using
+[az storage account create](https://docs.microsoft.com/en-us/cli/azure/storage/account?view=azure-cli-latest#az-storage-account-create):
+
+```sh
+export STORAGE_NAME=yourstoragename
+az storage account create \
+    --name $STORAGE_NAME \
+    --resource-group $RESOURCE_GROUP
+```
+
+Next, create a container in the above storage account that we'll use to store PST files using:
+[az storage container create](https://docs.microsoft.com/en-us/cli/azure/storage/container?view=azure-cli-latest#az-storage-container-create):
+
+```sh
+export CONTAINER_NAME=yourcontainername
+az storage container create \
+    --account-name $STORAGE_NAME \
+    --name $CONTAINER_NAME \
+    --public-access off
 ```
 
 

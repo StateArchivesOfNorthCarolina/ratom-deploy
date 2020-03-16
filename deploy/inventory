@@ -1,6 +1,6 @@
 caktus-ratom ansible_host=localhost connection=local
-ratom-staging ansible_host=localhost connection=local
+sanc-ratom ansible_host=localhost connection=local
 
 [k8s]
 caktus-ratom
-ratom-staging
+sanc-ratom
