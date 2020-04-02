@@ -2,3 +2,4 @@
 
 - src: https://github.com/caktus/ansible-role-k8s-web-cluster
   name: caktus.k8s-web-cluster
+  version: newrelic-infra
